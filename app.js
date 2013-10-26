@@ -1,6 +1,7 @@
 var express = require("express");
 var ldap = require('ldapjs');
 var fs = require('fs');
+var crypto = require('crypto');
 
 var app = express();
 var opts = {
@@ -51,13 +52,21 @@ app.get('/api/1/persons', function(request, response) {
         var people = [];
         res.on('searchEntry', function(entry) {
             console.log(entry.object);
+            var email = '';
+            if(entry.object.mail !== undefined){
+                email = entry.object.mail.toString().toLowerCase();
+            }
+
+            var shasum = crypto.createHash('md5').update(email).digest('hex');
             var person = {firstName: entry.object.givenName,
                 lastName: entry.object.sn,
                 email: entry.object.mail,
                 employeeType: entry.object.employeeType,
                 department: entry.object.departmentNumber,
                 title: entry.object.title,
-                msuNetId: entry.object.uid};
+                msuNetId: entry.object.uid,
+                gravatar: 'http://www.gravatar.com/avatar/' + shasum
+            };
             people.push(person);
         });
         res.on('error', function(err) {
