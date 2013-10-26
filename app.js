@@ -1,7 +1,8 @@
 var express = require("express");
 var ldap = require('ldapjs');
-var app = express();
+var fs = require('fs');
 
+var app = express();
 var opts = {
     filter: '',
     scope: 'sub'
@@ -17,7 +18,17 @@ app.get('/', function(request, response){
     response.send('The number you\'re trying to reach has been disconnected' );
 });
 
-app.get('/api/1/users', function(request, response) {
+app.get('/api', function(request, response){
+   fs.readFile('MSU-People-Search-API.raml', function(err, data){
+      if(err)
+        throw err;
+       var output = data.toString();
+       response.set('Content-Type', 'text/plain');
+       response.send(output);
+   });
+});
+
+app.get('/api/1/persons', function(request, response) {
     opts.filter = '&';
 
     if(request.query.firstname !== undefined){
@@ -61,7 +72,7 @@ app.get('/api/1/users', function(request, response) {
 
 });
 
-app.get('/api/1/users/:msunetid', function(request, response) {
+app.get('/api/1/persons/:msunetid', function(request, response) {
     var msunetid = request.params.msunetid;
     opts.filter = 'uid=' + msunetid;
     console.log('Filter', opts.filter);
