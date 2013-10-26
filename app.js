@@ -17,9 +17,47 @@ app.get('/', function(request, response){
     response.send('The number you\'re trying to reach has been disconnected' );
 });
 
-app.get('/api/1/users', function(req, res) {
-  var text = "Hello World!";
-  res.send(text);
+app.get('/api/1/users', function(request, response) {
+    opts.filter = '&';
+
+    if(request.query.firstname !== undefined){
+        opts.filter += '(givenName=' + request.query.firstname + '*)';
+    }
+    if(request.query.lastname !== undefined){
+        console.log(request.query.lastname);
+        opts.filter += '(sn=' + request.query.lastname + '*)';
+    }
+    if(request.query.msunetid !== undefined){
+        console.log(request.query.msunetid);
+        opts.filter += '(uid=' + request.query.msunetid + '*)';
+    }
+    if(opts.filter === '&'){
+        response.json(500, { error:
+            'Please put in a firstname, lastname, or msunetid to search' })
+    }
+    console.log('Filter', opts.filter);
+    client.search('dc=msu,dc=edu', opts, function(err, res) {
+        var people = [];
+        res.on('searchEntry', function(entry) {
+            var person = {firstName: entry.object.givenName,
+                lastName: entry.object.sn,
+                email: entry.object.mail,
+                employeeType: entry.object.employeeType,
+                department: entry.object.department,
+                title: entry.object.title,
+                msuNetId: entry.object.uid};
+            people.push(person);
+        });
+        res.on('error', function(err) {
+            console.error('error: ' + err.message);
+        });
+        res.on('end', function(result) {
+            console.log('status: ' + result.status);
+            console.log(people.length);
+            response.json({'users':people});
+        });
+    });
+
 });
 
 app.get('/api/1/users/:msunetid', function(request, response) {
@@ -39,13 +77,15 @@ app.get('/api/1/users/:msunetid', function(request, response) {
                 title: entry.object.title,
                 msuNetId: entry.object.uid};
                 people = person;
-                console.log(person);
         });
         res.on('error', function(err) {
             console.error('error: ' + err.message);
         });
         res.on('end', function(result) {
             console.log('status: ' + result.status);
+            if(people === undefined){
+                response.send(404);
+            }
             response.json({'user': people});
         });
     });
