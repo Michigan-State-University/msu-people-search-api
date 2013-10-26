@@ -39,11 +39,12 @@ app.get('/api/1/users', function(request, response) {
     client.search('dc=msu,dc=edu', opts, function(err, res) {
         var people = [];
         res.on('searchEntry', function(entry) {
+            console.log(entry.object);
             var person = {firstName: entry.object.givenName,
                 lastName: entry.object.sn,
                 email: entry.object.mail,
                 employeeType: entry.object.employeeType,
-                department: entry.object.department,
+                department: entry.object.departmentNumber,
                 title: entry.object.title,
                 msuNetId: entry.object.uid};
             people.push(person);
@@ -73,7 +74,7 @@ app.get('/api/1/users/:msunetid', function(request, response) {
                 lastName: entry.object.sn,
                 mail: entry.object.mail,
                 employeeType: entry.object.employeeType,
-                department: entry.object.department,
+                department: entry.object.departmentNumber,
                 title: entry.object.title,
                 msuNetId: entry.object.uid};
                 people = person;
