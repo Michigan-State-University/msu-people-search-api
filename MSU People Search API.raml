@@ -5,11 +5,11 @@ version: v1.0
 /persons:
   get:
     queryParameters:
-      msuNetId:
+      msunetid:
         description: Search by person MSU NetID
-      lastName:
+      lastname:
         description: Search by person last name
-      firstName:
+      firstname:
         description: Search by person first name
     description: Retrieving a record set of people that match the query parameters
   /{msunet}:
@@ -25,8 +25,9 @@ version: v1.0
                 "firstName": { "type": "string" },
                 "lastName": { "type": "string" },
                 "employeeType": { "type": "string" },
-                "mail": { "type": "string" },
-                "tite": { "type": "string" },
+                "email": { "type": "string" },
+                "title": { "type": "string" },
+                "msuNetId": { "type": "string" },
                 "department": { "type": "string" }
               }
             }
