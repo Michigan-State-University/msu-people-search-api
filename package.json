@@ -1,0 +1,18 @@
+{
+  "name": "MSU People Search API",
+  "version": "1.0.0",
+  "description": "MSU People Search API",
+  "main": "app.js",
+  "keywords": [
+    "node",
+    "api",
+    "msu net",
+    "msu"
+  ],
+  "author": "Troy Murray, Peter Cole, Jamie Rytlewski",
+  "license": "MIT",
+  "readmeFilename": "README.md",
+  "dependencies": {
+    "express": "~3.4.1"
+  }
+}
