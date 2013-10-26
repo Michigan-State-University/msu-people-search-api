@@ -22,3 +22,6 @@ nbproject/
 # SublimeText project files
 *.sublime-workspace
 sftp-config.json
+
+### Node.JS ###
+node_modules/

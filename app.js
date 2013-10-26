@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 /**
  * Module dependencies.
@@ -33,3 +34,24 @@ app.get('/users', user.list);
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
+=======
+var express = require('express'),
+    app = express();
+
+//Some Server configuration
+app.use(express.bodyParser());
+
+app.get('/', function(req, res) {
+  var text = "Hello World!";
+  res.send(text);
+});
+
+app.get('/api/1/users', function(req, res) {
+  var text = "Hello World!";
+  res.send(text);
+});
+
+
+//Start the app
+app.listen(8080);
+>>>>>>> master
