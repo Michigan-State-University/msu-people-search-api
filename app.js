@@ -56,7 +56,6 @@ app.get('/api/1/persons', function(request, response) {
             if(entry.object.mail !== undefined){
                 email = entry.object.mail.toString().toLowerCase();
             }
-
             var shasum = crypto.createHash('md5').update(email).digest('hex');
             var person = {
                 firstName: entry.object.givenName,
@@ -89,7 +88,14 @@ app.get('/api/1/persons/:msunetid', function(request, response) {
     client.search('dc=msu,dc=edu', opts, function(err, res) {
         var people;
         res.on('searchEntry', function(entry) {
+
+            var email = '';
+            if(entry.object.mail !== undefined){
+                email = entry.object.mail.toString().toLowerCase();
+            }
             var shasum = crypto.createHash('md5').update(email).digest('hex');
+
+
             var person = {
                 firstName: entry.object.givenName,
                 lastName: entry.object.sn,
