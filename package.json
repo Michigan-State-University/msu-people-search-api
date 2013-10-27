@@ -9,7 +9,6 @@
     "msu net",
     "msu"
   ],
-  "scripts": {"start": "node server.js"},
   "author": "Troy Murray, Peter Cole, Jamie Rytlewski",
   "license": "MIT",
   "readmeFilename": "README.md",
