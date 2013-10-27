@@ -58,13 +58,14 @@ app.get('/api/1/persons', function(request, response) {
             }
 
             var shasum = crypto.createHash('md5').update(email).digest('hex');
-            var person = {firstName: entry.object.givenName,
+            var person = {
+                firstName: entry.object.givenName,
                 lastName: entry.object.sn,
-                email: entry.object.mail,
-                employeeType: entry.object.employeeType,
-                department: entry.object.departmentNumber,
                 title: entry.object.title,
-                msuNetId: entry.object.uid,
+                employeeType: entry.object.employeeType,
+                email: entry.object.mail,
+                department: entry.object.departmentNumber,
+                msunetid: entry.object.uid,
                 gravatar: 'http://www.gravatar.com/avatar/' + shasum
             };
             people.push(person);
@@ -88,16 +89,18 @@ app.get('/api/1/persons/:msunetid', function(request, response) {
     client.search('dc=msu,dc=edu', opts, function(err, res) {
         var people;
         res.on('searchEntry', function(entry) {
-            //console.log('entry: ' + JSON.stringify(entry.object));
-            //output += JSON.stringify(entry.object);
-            var person = {firstName: entry.object.givenName,
+            var shasum = crypto.createHash('md5').update(email).digest('hex');
+            var person = {
+                firstName: entry.object.givenName,
                 lastName: entry.object.sn,
-                mail: entry.object.mail,
-                employeeType: entry.object.employeeType,
-                department: entry.object.departmentNumber,
                 title: entry.object.title,
-                msuNetId: entry.object.uid};
-                people = person;
+                employeeType: entry.object.employeeType,
+                email: entry.object.mail,
+                department: entry.object.departmentNumber,
+                msunetid: entry.object.uid,
+                gravatar: 'http://www.gravatar.com/avatar/' + shasum
+            };
+            people = person;
         });
         res.on('error', function(err) {
             console.error('error: ' + err.message);

@@ -1,7 +1,7 @@
 #%RAML 0.8
 title: MSU People Search API
 baseUri: http://hackathon-14.itservices.msu.edu/api/1
-version: v1.0
+version: v1.1
 /persons:
   get:
     queryParameters:
@@ -21,13 +21,14 @@ version: v1.0
               "type": "object",
               "description": "string",
               "properties": {
-                "title":  { "type": "string" },
                 "firstName": { "type": "string" },
                 "lastName": { "type": "string" },
+                "title":  { "type": "string" },
                 "employeeType": { "type": "string" },
                 "email": { "type": "string" },
-                "title": { "type": "string" },
                 "msuNetId": { "type": "string" },
-                "department": { "type": "string" }
+                "department": { "type": "string" },
+                "msunetid": { "type": "string" },
+                "gravatar": { "type": "string" }
               }
             }
