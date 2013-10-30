@@ -43,9 +43,13 @@ app.get('/api/1/persons', function(request, response) {
         console.log(request.query.msunetid);
         opts.filter += '(uid=' + request.query.msunetid + '*)';
     }
+    if(request.query.departmentname !== undefined){
+        console.log(request.query.departmentname);
+        opts.filter += '(departmentNumber=*' + request.query.departmentname + '*)';
+    }
     if(opts.filter === '&'){
         response.json(500, { error:
-            'Please put in a firstname, lastname, or msunetid to search' })
+            'Please put in a firstname, lastname, department name or msunetid to search' })
     }
     console.log('Filter', opts.filter);
     client.search('dc=msu,dc=edu', opts, function(err, res) {
