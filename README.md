@@ -1,5 +1,7 @@
 # README
 
+[![Code Climate](https://codeclimate.com/github/Michigan-State-University/msu-people-search-api.png)](https://codeclimate.com/github/Michigan-State-University/msu-people-search-api)
+
 ## Installation
 
 To use this application you will need to clone it to the system that you want to run it from. Next change to the directory and install the packages needed using `npm install` and then start the service using `pm2 start app.js`
