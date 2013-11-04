@@ -69,7 +69,8 @@ app.get('/api/1/persons', function(request, response) {
                 email: entry.object.mail,
                 department: entry.object.departmentNumber,
                 msunetid: entry.object.uid,
-                gravatar: 'http://www.gravatar.com/avatar/' + shasum
+                gravatar: 'http://www.gravatar.com/avatar/' + shasum,
+                phone: entry.object.telephoneNumber
             };
             people.push(person);
         });
@@ -108,7 +109,8 @@ app.get('/api/1/persons/:msunetid', function(request, response) {
                 email: entry.object.mail,
                 department: entry.object.departmentNumber,
                 msunetid: entry.object.uid,
-                gravatar: 'http://www.gravatar.com/avatar/' + shasum
+                gravatar: 'http://www.gravatar.com/avatar/' + shasum,
+                phone: entry.object.telephoneNumber
             };
             people = person;
         });
