@@ -1,0 +1,37 @@
+#%RAML 0.8
+title: MSU People Search API
+baseUri: http://hackathon-14.itservices.msu.edu/api/1
+version: v1.2
+/persons:
+  get:
+    queryParameters:
+      msunetid:
+        description: Search by person MSU NetID, wildcard is included after string provided.
+      lastname:
+        description: Search by person last name, wildcard is included after string provided.
+      firstname:
+        description: Search by person first name, wildcard is included after string provided.
+      departmentname:
+        description: Search by department name, uses wildcard before and after string provided.
+    description: Retrieving a record set of people that match the query parameters
+  /{msunetid}:
+    get:
+      body:
+        application/json:
+          schema: | 
+            {
+              "type": "object",
+              "description": "string",
+              "properties": {
+                "firstName": { "type": "string" },
+                "lastName": { "type": "string" },
+                "title":  { "type": "string" },
+                "employeeType": { "type": "string" },
+                "email": { "type": "string" },
+                "msuNetId": { "type": "string" },
+                "department": { "type": "string" },
+                "msunetid": { "type": "string" },
+                "gravatar": { "type": "string" }
+              }
+            }
+

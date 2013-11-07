@@ -22,12 +22,16 @@
     "msu net",
     "msu"
   ],
-  "scripts": {"start": "node server.js"},
   "author": "Troy Murray, Peter Cole, Jamie Rytlewski",
   "license": "MIT",
   "readmeFilename": "README.md",
   "dependencies": {
-    "express": "~3.4.1"
+    "express": "~3.4.3",
+    "ldapjs": "0.6.3",
+    "pm2": "0.6.3"
+  },
+  "scripts": {
+    "preinstall": "npm i -g pm2"
   }
 }
 >>>>>>> master
