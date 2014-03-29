@@ -16,7 +16,7 @@ var client = ldap.createClient({
 var imgURL = 'public/images/still-use-ie.jpg';
    
 app.get('/', function(request, response){
-    response.send('The number you\'re trying to reach has been disconnected' );
+    response.send('<html><head><title>MSU People Search API</title></head><body><h1>Searching for people</h1><p>You can search for one or more people by passing in values for various search criteria, for example:</p><a href="http://localhost:8080/api/1/persons/?firstname=t&lastname=m&msunetid=t&departmentname=i">http://localhost:8080/api/1/persons/?firstname=t&lastname=m&msunetid=t&departmentname=i</a><br><h1>View Single Employee</h1><p>You can also display the information for a single employee by using their MSU NetID.</p><a href="http://localhost:8080/api/1/persons/rytlews3">http://localhost:8080/api/1/persons/rytlews3</a><br></body></html>' );
 });
 
 app.get('/api', function(request, response){
